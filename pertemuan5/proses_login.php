@@ -1,12 +1,11 @@
 <?php
 session_start();
-include 'koneksi.php'; // Menghubungkan ke database
+include 'koneksi.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    $password = $_POST["password"]; // Password yang dimasukkan oleh pengguna
+    $password = $_POST["password"]; 
 
-    // Ambil data pengguna dari database berdasarkan username
     $query = "SELECT password FROM users WHERE username = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $username);
@@ -20,11 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Password cocok, inisialisasi session
         $_SESSION["username"] = $username;
 
-        // Redirect ke halaman utama atau dashboard
+        
         header("Location: dashboard.php");
         exit();
     } else {
-        // Password tidak cocok, tampilkan pesan kesalahan
+        
         echo "Username atau password salah. Coba lagi.";
     }
 }
